@@ -5,7 +5,5 @@
   "main": "index.js",
   "author": "Sohail Yar Khan (Ikigai Digital)",
   "license": "MIT",
-  "dependencies": {
-    "@openapitools/openapi-generator-cli": "^2.5.1"
-  }
+  "dependencies": {}
 }
