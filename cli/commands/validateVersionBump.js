@@ -60,7 +60,7 @@ const validateSingleVersionBump = async (filePaths) => {
       if (newVersion === oldVersion) {
         console.error(`No version bump detected in ${filePaths.relativeFile}`)
         console.log('Spec changes need to be accompanied by a version bump')
-        console.log(result.differences)
+        console.log({ newVersion, oldVersion })
 
         throw Error(NO_VERSION_BUMP)
       }
