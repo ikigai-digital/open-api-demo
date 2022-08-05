@@ -88,7 +88,7 @@ export const validateVersionBump = async (options) => {
 
     const ymlFiles = await diffYmlFiles()
 
-    if (ymlFiles.length) {
+    if (ymlFiles && ymlFiles.length) {
       for (const filePaths of ymlFiles) {
         await validateSingleVersionBump(filePaths)
       }

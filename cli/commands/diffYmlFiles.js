@@ -27,7 +27,7 @@ export const diffYmlFiles = async () => {
       )
 
       if (ymlFiles.length === 0) {
-        logger.info('No yml files detected')
+        logger.info('No changed yml files found')
 
         return
       }
