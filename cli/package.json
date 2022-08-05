@@ -7,14 +7,14 @@
   "bin": {
     "openapi": "index.js"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
     "@openapitools/openapi-generator-cli": "^2.5.1",
-    "commander": "^9.4.0"
+    "commander": "^9.4.0",
+    "openapi-diff": "^0.23.6",
+    "yaml": "^2.1.1"
   }
 }
