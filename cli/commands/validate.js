@@ -1,4 +1,5 @@
 import { exec } from 'child_process'
+import fs from 'fs'
 import util from 'util'
 
 import { diffYmlFiles } from './diffYmlFiles.js'
@@ -49,7 +50,7 @@ export const validate = async (options) => {
           if (options.force) {
             logger.success(
               'Successfully validated recently deleted file since spec deletion is allowed: ',
-              filePath,
+              filePath.relativeFile,
             )
 
             return
@@ -57,7 +58,7 @@ export const validate = async (options) => {
 
           logger.error(
             'Failed to validate recently deleted file since spec deletion is not allowed: ',
-            filePath,
+            filePath.relativeFile,
           )
 
           throw new Error(SPEC_DELETED)
