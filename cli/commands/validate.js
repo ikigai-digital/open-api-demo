@@ -2,6 +2,7 @@ import { exec } from 'child_process'
 import util from 'util'
 
 import { diffYmlFiles } from './diffYmlFiles.js'
+import { SPEC_DELETED } from '../constants/errors.js'
 import { getAllYmlFiles } from '../utils/getAllYmlFiles.js'
 import { logger } from '../utils/logger.js'
 
@@ -39,7 +40,28 @@ export const validate = async (options) => {
       const ymlFiles = await diffYmlFiles()
 
       if (ymlFiles && ymlFiles.length) {
-        ymlFiles.forEach((filePath) => validateSingleFile(filePath.absoluteFile))
+        ymlFiles.forEach((filePath) => {
+          if (fs.existsSync(filePath.absoluteFile)) {
+            validateSingleFile(filePath.absoluteFile)
+            return
+          }
+
+          if (options.force) {
+            logger.success(
+              'Successfully validated recently deleted file since spec deletion is allowed: ',
+              filePath,
+            )
+
+            return
+          }
+
+          logger.error(
+            'Failed to validate recently deleted file since spec deletion is not allowed: ',
+            filePath,
+          )
+
+          throw new Error(SPEC_DELETED)
+        })
       }
 
       return
