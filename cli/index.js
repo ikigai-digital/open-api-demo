@@ -25,8 +25,9 @@ program
 // Validate version bumps for specific file or all diffed files
 program
   .command('validate-version-bump')
-  .option('-d, --diff', 'Run validate on all changed yml files')
+  .option('-d, --diff', 'Run validate on all changed yml files', true)
   .option('-i, --inputSpec <string>', 'Single spec file to validate')
+  .option('-f, --force', 'Allow deletion of specs', false)
   .action(validateVersionBump)
 
 program.parse(process.argv)

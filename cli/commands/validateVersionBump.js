@@ -5,7 +5,7 @@ import util from 'util'
 import yaml from 'yaml'
 
 import { diffYmlFiles } from './diffYmlFiles.js'
-import { BREAKING_CHANGES, NO_VERSION_BUMP } from '../constants/errors.js'
+import { BREAKING_CHANGES, NO_VERSION_BUMP, SPEC_DELETED } from '../constants/errors.js'
 import { logger } from '../utils/logger.js'
 
 const execAsync = util.promisify(exec)
@@ -90,7 +90,25 @@ export const validateVersionBump = async (options) => {
 
     if (ymlFiles && ymlFiles.length) {
       for (const filePaths of ymlFiles) {
-        await validateSingleVersionBump(filePaths)
+        if (fs.existsSync(filePaths.absoluteFile)) {
+          await validateSingleVersionBump(filePaths)
+        }
+
+        if (options.force) {
+          logger.success(
+            'Successfully validated recently deleted file since spec deletion is allowed: ',
+            filePaths.relativeFile,
+          )
+
+          return
+        }
+
+        logger.error(
+          'Failed to validate recently deleted file since spec deletion is not allowed: ',
+          filePaths.relativeFile,
+        )
+
+        throw new Error(SPEC_DELETED)
       }
     }
   } catch (error) {
