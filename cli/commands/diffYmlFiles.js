@@ -3,6 +3,8 @@ import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
 import util from 'util'
 
+import { logger } from '../utils/logger.js'
+
 const execAsync = util.promisify(exec)
 
 const __filename = fileURLToPath(import.meta.url)
@@ -13,7 +15,7 @@ export const diffYmlFiles = async () => {
     const { stdout, stderr } = await execAsync('git diff origin/main --name-only')
 
     if (stderr) {
-      console.error('Something went wrong getting the changed files:', stderr)
+      logger.error('Something went wrong getting the changed files: ', stderr)
 
       return
     }
@@ -25,7 +27,7 @@ export const diffYmlFiles = async () => {
       )
 
       if (ymlFiles.length === 0) {
-        console.log('No yml files changed')
+        logger.info('No yml files detected')
 
         return
       }
@@ -35,10 +37,10 @@ export const diffYmlFiles = async () => {
         relativeFile: file,
       }))
 
-      console.log('Detected changes in the following files: ', ymlFiles.join(', '))
+      logger.warn('Detected changes in the following files: ', ymlFiles.join(', '))
       return finalFiles
     }
   } catch (error) {
-    console.error('Something went wrong getting the changed files:', error)
+    logger.error('Something went wrong getting the changed files: ', error)
   }
 }

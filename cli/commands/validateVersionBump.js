@@ -6,6 +6,7 @@ import yaml from 'yaml'
 
 import { diffYmlFiles } from './diffYmlFiles.js'
 import { BREAKING_CHANGES, NO_VERSION_BUMP } from '../constants/errors.js'
+import { logger } from '../utils/logger.js'
 
 const execAsync = util.promisify(exec)
 
@@ -15,7 +16,7 @@ const TMP_DIR = 'tmp'
 
 const validateSingleVersionBump = async (filePaths) => {
   try {
-    console.log('Validating file: ', filePaths.relativeFile)
+    logger.warn('Validating file: ', filePaths.relativeFile)
     const tmpFilePath = `${TMP_DIR}/${filePaths.relativeFile}`
 
     // Fetching the file from the repository
@@ -48,28 +49,25 @@ const validateSingleVersionBump = async (filePaths) => {
       const newVersion = parsedDestYaml.info.version
 
       if (isBreaking) {
-        console.error(`Breaking change detected in ${filePaths.relativeFile}`)
-        console.log(
-          'Breaking changes detected, breaking changes need to committed with major version bump and a new a new spec file',
-        )
-        console.log(result.differences)
+        logger.error(`Breaking change detected in ${filePaths.relativeFile}`)
+        logger.info(JSON.stringify(result.breakingDifferences, null, 4))
 
         throw Error(BREAKING_CHANGES)
       }
 
       if (newVersion === oldVersion) {
-        console.error(`No version bump detected in ${filePaths.relativeFile}`)
-        console.log('Spec changes need to be accompanied by a version bump')
-        console.log({ newVersion, oldVersion })
+        logger.error(`No version bump detected in ${filePaths.relativeFile}`)
+        logger.info('Spec changes need to be accompanied by a version bump')
+        logger.info({ newVersion, oldVersion })
 
         throw Error(NO_VERSION_BUMP)
       }
       //   console.log({ result, isBreaking, parsedSourceYaml, parsedDestYaml, oldVersion, newVersion })
     }
 
-    console.log('No issues found!')
+    logger.success('No issues found!')
   } catch (error) {
-    console.error(
+    logger.error(
       `Failed to validate version of file at path ${filePaths.relativeFile} with error: `,
       error,
     )
@@ -96,6 +94,6 @@ export const validateVersionBump = async (options) => {
       }
     }
   } catch (error) {
-    console.error('Something went wrong validating versions files: ', error)
+    logger.error('Something went wrong validating versions files: ', error)
   }
 }

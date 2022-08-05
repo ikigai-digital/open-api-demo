@@ -3,6 +3,7 @@ import util from 'util'
 
 import { diffYmlFiles } from './diffYmlFiles.js'
 import { getAllYmlFiles } from '../utils/getAllYmlFiles.js'
+import { logger } from '../utils/logger.js'
 
 const execAsync = util.promisify(exec)
 
@@ -13,16 +14,16 @@ const validateSingleFile = async (filePath) => {
     )
 
     if (stderr) {
-      console.error(`Failed to validate file at path ${filePath} with error: `, stderr)
+      logger.error(`Failed to validate file at path ${filePath} with error: `, stderr)
 
       return
     }
 
     if (stdout) {
-      console.log('Successfully validated file: ', filePath)
+      logger.info('Successfully validated file: ', filePath)
     }
   } catch (error) {
-    console.error(`Failed to validate file at path ${filePath} with error: `, error)
+    logger.error(`Failed to validate file at path ${filePath} with error: `, error)
   }
 }
 
@@ -50,6 +51,6 @@ export const validate = async (options) => {
       ymlFiles.forEach((filePath) => validateSingleFile(filePath))
     }
   } catch (error) {
-    console.error('Something went wrong validating files: ', error)
+    logger.error('Something went wrong validating files: ', error)
   }
 }
