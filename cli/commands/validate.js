@@ -20,7 +20,7 @@ const validateSingleFile = async (filePath) => {
     }
 
     if (stdout) {
-      logger.info('Successfully validated file: ', filePath)
+      logger.success('Successfully validated file: ', filePath)
     }
   } catch (error) {
     logger.error(`Failed to validate file at path ${filePath} with error: `, error)
