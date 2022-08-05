@@ -37,8 +37,8 @@ export const validate = async (options) => {
     if (options.diff) {
       const ymlFiles = await diffYmlFiles()
 
-      if (ymlFiles) {
-        ymlFiles.forEach((filePath) => validateSingleFile(filePath))
+      if (ymlFiles.length) {
+        ymlFiles.forEach((filePath) => validateSingleFile(filePath.absoluteFile))
       }
 
       return

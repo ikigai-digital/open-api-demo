@@ -30,9 +30,12 @@ export const diffYmlFiles = async () => {
         return
       }
 
-      const finalFiles = ymlFiles.map((file) => join(__dirname, '../../', file))
+      const finalFiles = ymlFiles.map((file) => ({
+        absoluteFile: join(__dirname, '../../', file),
+        relativeFile: file,
+      }))
 
-      console.log('Detected changes in the following files: ', finalFiles.join(', '))
+      console.log('Detected changes in the following files: ', ymlFiles.join(', '))
       return finalFiles
     }
   } catch (error) {
