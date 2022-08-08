@@ -28,24 +28,21 @@ const generateSingleFile = async (filePath, type) => {
     )
 
     if (stderr) {
-      logger.error(`Failed to validate file at path ${filePath} with error: `, stderr)
+      logger.error(`Failed to generate ${type} for file at path ${filePath} with error: `, stderr)
 
       return
     }
 
     if (stdout) {
-      logger.success('Successfully validated file: ', filePath)
+      logger.success(`Successfully generated ${type} for file: `, filePath)
     }
   } catch (error) {
-    logger.error(`Failed to validate file at path ${filePath} with error: `, error)
+    logger.error(`Failed to generate ${type} for file at path ${filePath} with error: `, error)
   }
 }
 
 export const generateFiles = async (options) => {
   try {
-    console.log({
-      options,
-    })
     if (options.inputSpec) {
       await generateSingleFile(options.inputSpec, options.type)
 
@@ -63,7 +60,7 @@ export const generateFiles = async (options) => {
           }
 
           logger.error(
-            'Failed to validate recently deleted file since spec deletion is not allowed: ',
+            `Failed to generate ${options.type} for recently deleted file: `,
             filePath.relativeFile,
           )
 
@@ -72,6 +69,6 @@ export const generateFiles = async (options) => {
       }
     }
   } catch (error) {
-    logger.error('Something went wrong validating files: ', error)
+    logger.error(`Something went wrong generating ${options.type} for files: `, error)
   }
 }

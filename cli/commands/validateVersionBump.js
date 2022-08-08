@@ -89,6 +89,8 @@ export const validateVersionBump = async (options) => {
       for (const filePaths of ymlFiles) {
         if (fs.existsSync(filePaths.absoluteFile)) {
           await validateSingleVersionBump(filePaths)
+
+          return
         }
 
         if (options.force) {
