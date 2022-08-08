@@ -30,4 +30,15 @@ program
   .option('-f, --force', 'Allow deletion of specs', false)
   .action(validateVersionBump)
 
+// Generate server stubs or client code for specific file or all diffed files
+program
+  .command('generate')
+  .option('-t', '--type <string>', 'Generate server stubs or client code', 'server-stub')
+  .option('-d, --diff', 'Generate the stubs or clients for all changed files', true)
+  .option(
+    '-i, --inputSpec <string>',
+    'Generate server stub or client for single inputted spec file',
+  )
+  .action(validateVersionBump)
+
 program.parse(process.argv)

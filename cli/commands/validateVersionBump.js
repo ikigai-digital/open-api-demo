@@ -12,8 +12,6 @@ const execAsync = util.promisify(exec)
 
 const TMP_DIR = 'tmp'
 
-// git --work-tree tmp/ restore -s origin/main openapi/contracts/inventory/openapi/inventoryApi/v1.yml
-
 const validateSingleVersionBump = async (filePaths) => {
   try {
     logger.warn('Validating file: ', filePaths.relativeFile)
@@ -62,7 +60,6 @@ const validateSingleVersionBump = async (filePaths) => {
 
         throw Error(NO_VERSION_BUMP)
       }
-      //   console.log({ result, isBreaking, parsedSourceYaml, parsedDestYaml, oldVersion, newVersion })
     }
 
     logger.success('No issues found!')
@@ -113,5 +110,9 @@ export const validateVersionBump = async (options) => {
     }
   } catch (error) {
     logger.error('Something went wrong validating versions files: ', error)
+  } finally {
+    if (fs.existsSync(TMP_DIR)) {
+      fs.rmdirSync(TMP_DIR, { recursive: true })
+    }
   }
 }

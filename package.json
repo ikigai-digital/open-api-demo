@@ -11,7 +11,7 @@
   },
   "homepage": "https://github.com/ikigai-digital/open-api-demo#readme",
   "scripts": {
-    "generate-typescript-clients": "openapi-generator-cli generate -i contracts/inventory/openapi/inventoryApi/v1.yml -g typescript-axios -o clients/openapi --additional-properties=npmName=restClient,supportsES6=true,withInterfaces=true"
+    "generate-typescript-clients": "openapi-generator-cli generate -i contracts/inventory/openapi/inventoryApi/v1.yml -g typescript-node -o clients/openapi --additional-properties=npmName=restClient,supportsES6=true,withInterfaces=true"
   },
   "author": "Sohail Yar Khan (Ikigai Digital)",
   "license": "MIT"

@@ -1,0 +1,5 @@
+{
+  "npmRepository": "https://idigital.jfrog.io/artifactory/api/npm/shared-npm",
+  "supportsES6": true,
+  "withInterfaces": true
+}
