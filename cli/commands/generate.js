@@ -8,19 +8,23 @@ import { logger } from '../utils/logger.js'
 
 const execAsync = util.promisify(exec)
 
-const generateSingleFile = async (filePath) => {
+const generateSingleFile = async (filePath, type) => {
   try {
     const buildDir = filePath.replace('.yml', '')
     const buildDirArr = buildDir.split('/')
     const npmName = buildDirArr[buildDirArr.length - 1]
 
+    const generatorType = type === 'server-stub' ? 'nodejs-express-server' : 'typescript-axios'
     console.log({
       npmName,
       buildDir,
       filePath,
+      type,
+      generatorType,
     })
+
     const { stdout, stderr } = await execAsync(
-      `npx @openapitools/openapi-generator-cli generate -i ${filePath} -g typescript-axios -o build/${buildDir} --additional-properties=npmName=@ikigai-digital/${npmName},npmRepository=https://idigital.jfrog.io/artifactory/api/npm/shared-npm,supportsES6=false,withInterfaces=true --git-repo-id open-api-demo --git-user-id ikigai-digital`,
+      `npx @openapitools/openapi-generator-cli generate -i ${filePath} -g ${generatorType} -o build/${type}/${buildDir} --additional-properties=npmName=@ikigai-digital/${npmName},npmRepository=https://idigital.jfrog.io/artifactory/api/npm/shared-npm,supportsES6=false,withInterfaces=true --git-repo-id open-api-demo --git-user-id ikigai-digital`,
     )
 
     if (stderr) {
@@ -39,8 +43,11 @@ const generateSingleFile = async (filePath) => {
 
 export const generateFiles = async (options) => {
   try {
+    console.log({
+      options,
+    })
     if (options.inputSpec) {
-      await generateSingleFile(options.inputSpec)
+      await generateSingleFile(options.inputSpec, options.type)
 
       return
     }
@@ -51,7 +58,7 @@ export const generateFiles = async (options) => {
       if (ymlFiles && ymlFiles.length) {
         ymlFiles.forEach((filePath) => {
           if (fs.existsSync(filePath.relativeFile)) {
-            generateSingleFile(filePath.relativeFile)
+            generateSingleFile(filePath.relativeFile, options.type)
             return
           }
 

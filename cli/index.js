@@ -34,8 +34,8 @@ program
 // Generate server stubs or client code for specific file or all diffed files
 program
   .command('generate')
-  .option('-t', '--type <string>', 'Generate server-stub or client', 'server-stub')
-  .option('-d, --diff', 'Generate the stubs or clients for all changed files', true)
+  .option('-t, --type <string>', 'Generate server-stub or client', 'client')
+  .option('-d --diff', 'Generate the stubs or clients for all changed files', true)
   .option(
     '-i, --inputSpec <string>',
     'Generate server stub or client for single inputted spec file',
