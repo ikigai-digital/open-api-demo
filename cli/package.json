@@ -15,6 +15,10 @@
     "@openapitools/openapi-generator-cli": "^2.5.1",
     "commander": "^9.4.0",
     "openapi-diff": "^0.23.6",
+    "semver": "^7.3.7",
     "yaml": "^2.1.1"
+  },
+  "devDependencies": {
+    "@types/semver": "^7.3.11"
   }
 }

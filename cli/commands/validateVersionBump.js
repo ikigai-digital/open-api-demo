@@ -2,10 +2,16 @@ import { exec } from 'child_process'
 import fs from 'fs'
 import openapiDiff from 'openapi-diff'
 import util from 'util'
+import semver from 'semver'
 import yaml from 'yaml'
 
 import { diffYmlFiles } from './diffYmlFiles.js'
-import { BREAKING_CHANGES, NO_VERSION_BUMP, SPEC_DELETED } from '../constants/errors.js'
+import {
+  BREAKING_CHANGES,
+  NO_VERSION_BUMP,
+  SPEC_DELETED,
+  INVALID_VERSION_BUMP,
+} from '../constants/errors.js'
 import { logger } from '../utils/logger.js'
 
 const execAsync = util.promisify(exec)
@@ -59,6 +65,16 @@ const validateSingleVersionBump = async (filePaths) => {
         logger.info({ newVersion, oldVersion })
 
         throw Error(NO_VERSION_BUMP)
+      }
+
+      if (!semver.valid(newVersion) || semver.lt(oldVersion, newVersion)) {
+        logger.error(`Invalid version bump detected in ${filePaths.relativeFile}`)
+        logger.info(
+          'Version bump needs to be a valid semver version and greater than the previous version',
+        )
+        logger.info({ newVersion, oldVersion })
+
+        throw Error(INVALID_VERSION_BUMP)
       }
     }
 
