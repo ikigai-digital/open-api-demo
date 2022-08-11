@@ -25,7 +25,9 @@ const validateSingleFile = async (filePath) => {
       logger.success('Successfully validated file: ', filePath)
     }
   } catch (error) {
-    logger.error(`Failed to validate file at path ${filePath} with error: `, error)
+    logger.error(`Failed to validate file at path ${filePath} with error: `, error.message)
+
+    throw error
   }
 }
 
@@ -74,6 +76,8 @@ export const validate = async (options) => {
       ymlFiles.forEach((filePath) => validateSingleFile(filePath))
     }
   } catch (error) {
-    logger.error('Something went wrong validating files: ', error)
+    logger.error('Something went wrong validating files: ', error.message)
+
+    throw error
   }
 }

@@ -37,7 +37,12 @@ const generateSingleFile = async (filePath, type) => {
       logger.success(`Successfully generated ${type} for file: `, filePath)
     }
   } catch (error) {
-    logger.error(`Failed to generate ${type} for file at path ${filePath} with error: `, error)
+    logger.error(
+      `Failed to generate ${type} for file at path ${filePath} with error: `,
+      error.message,
+    )
+
+    throw error
   }
 }
 
@@ -69,6 +74,8 @@ export const generateFiles = async (options) => {
       }
     }
   } catch (error) {
-    logger.error(`Something went wrong generating ${options.type} for files: `, error)
+    logger.error(`Something went wrong generating ${options.type} for files: `, error.message)
+
+    throw error
   }
 }

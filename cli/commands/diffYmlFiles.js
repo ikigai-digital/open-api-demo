@@ -41,6 +41,8 @@ export const diffYmlFiles = async () => {
       return finalFiles
     }
   } catch (error) {
-    logger.error('Something went wrong getting the changed files: ', error)
+    logger.error('Something went wrong getting the changed files: ', error.message)
+
+    throw error
   }
 }

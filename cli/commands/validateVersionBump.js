@@ -82,8 +82,10 @@ const validateSingleVersionBump = async (filePaths) => {
   } catch (error) {
     logger.error(
       `Failed to validate version of file at path ${filePaths.relativeFile} with error: `,
-      error,
+      error.message,
     )
+
+    throw error
   }
 }
 
@@ -127,10 +129,21 @@ export const validateVersionBump = async (options) => {
       }
     }
   } catch (error) {
-    logger.error('Something went wrong validating versions files: ', error)
+    logger.error('Something went wrong validating versions files: ', error.message)
+
+    throw error
   } finally {
     if (fs.existsSync(TMP_DIR)) {
-      fs.rmdirSync(TMP_DIR, { recursive: true })
+      logger.warn(`Cleaning up ${TMP_DIR} directory`)
+      fs.rm(TMP_DIR, { recursive: true }, (err) => {
+        if (err) {
+          logger.error(`Failed to clean up ${TMP_DIR} directory: `, err)
+
+          return
+        }
+
+        logger.success(`Successfully cleaned up ${TMP_DIR} directory`)
+      })
     }
   }
 }

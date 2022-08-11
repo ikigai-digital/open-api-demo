@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { program } from 'commander'
 import { diffYmlFiles } from './commands/diffYmlFiles.js'
+import { publish } from './commands/publish.js'
 import { validate } from './commands/validate.js'
 import { validateVersionBump } from './commands/validateVersionBump.js'
 import { generateFiles } from './commands/generate.js'
@@ -41,5 +42,14 @@ program
     'Generate server stub or client for single inputted spec file',
   )
   .action(generateFiles)
+
+// Publish specific file, all diffed files (default) or all files
+program
+  .command('publish')
+  .option('-d, --diff', 'Run publish on all changed yml files', true)
+  .option('-i, --inputSpec <string>', 'Single spec file to publish')
+  .option('-a, --all', 'publish all specs', false)
+  .option('-p, --platform <string>', 'Platform to publish to', 'jfrog')
+  .action(publish)
 
 program.parse(process.argv)
