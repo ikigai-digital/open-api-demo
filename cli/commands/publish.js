@@ -22,7 +22,7 @@ const publishSingleSpec = async (filePath) => {
     const parsedDestYaml = yaml.parse(rawDestYaml)
     const version = parsedDestYaml.info.version
     const jfrogPath = `${bc}/${apiName}/${version}/swagger.yaml`
-
+    logger.success(`Validating ${jfrogPath}`)
     logger.info('Checking if spec already exists in artifactory')
     const getSpecResponse = await fetch(
       `https://idigital.jfrog.io/artifactory/contracts-generic-local/openapi/${jfrogPath}`,
@@ -37,7 +37,7 @@ const publishSingleSpec = async (filePath) => {
       const fileStats = fs.statSync(filePath)
       let readStream = fs.createReadStream(filePath)
 
-      logger.info(`Publishing to ${jfrogPath}`)
+      logger.info(`Publishing ${jfrogPath}`)
       const publishResponse = await fetch(
         `https://idigital.jfrog.io/artifactory/contracts-generic-local/openapi/${jfrogPath}`,
         {
@@ -61,8 +61,6 @@ const publishSingleSpec = async (filePath) => {
     throw new Error(SPEC_ALREADY_EXISTS_IN_ARTIFACTORY)
   } catch (error) {
     logger.error(`Failed to publish file at path ${filePath} with error: `, error.message)
-
-    throw error
   }
 }
 
@@ -88,12 +86,11 @@ export const publish = async (options) => {
       const ymlFiles = await diffYmlFiles()
 
       if (ymlFiles && ymlFiles.length) {
-        ymlFiles.forEach((filePath) => {
+        for (const filePath of ymlFiles) {
           if (fs.existsSync(filePath.absoluteFile)) {
-            publishSingleSpec(filePath.absoluteFile)
-            return
+            await publishSingleSpec(filePath.absoluteFile)
           }
-        })
+        }
       }
 
       return

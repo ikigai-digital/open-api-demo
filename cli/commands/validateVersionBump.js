@@ -84,8 +84,6 @@ const validateSingleVersionBump = async (filePaths) => {
       `Failed to validate version of file at path ${filePaths.relativeFile} with error: `,
       error.message,
     )
-
-    throw error
   }
 }
 

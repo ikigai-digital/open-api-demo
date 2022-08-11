@@ -26,8 +26,6 @@ const validateSingleFile = async (filePath) => {
     }
   } catch (error) {
     logger.error(`Failed to validate file at path ${filePath} with error: `, error.message)
-
-    throw error
   }
 }
 

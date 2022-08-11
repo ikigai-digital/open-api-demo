@@ -41,8 +41,6 @@ const generateSingleFile = async (filePath, type) => {
       `Failed to generate ${type} for file at path ${filePath} with error: `,
       error.message,
     )
-
-    throw error
   }
 }
 
