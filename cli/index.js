@@ -35,12 +35,7 @@ program
 // Generate server stubs or client code for specific file or all diffed files
 program
   .command('generate')
-  .option('-t, --type <string>', 'Generate server-stub or client', 'client')
-  .option('-d --diff', 'Generate the stubs or clients for all changed files', true)
-  .option(
-    '-i, --inputSpec <string>',
-    'Generate server stub or client for single inputted spec file',
-  )
+  .option('-c, --config <string>', 'Config file to use for generation')
   .action(generateFiles)
 
 // Publish specific file, all diffed files (default) or all files

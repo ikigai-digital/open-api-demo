@@ -5,5 +5,10 @@
   "main": "index.js",
   "author": "Sohail Yar Khan (Ikigai Digital)",
   "license": "MIT",
-  "dependencies": {}
+  "devDependencies": {
+    "@types/node": "^18.7.1"
+  },
+  "dependencies": {
+    "swagger-ui-express": "^4.5.0"
+  }
 }
