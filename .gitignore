@@ -106,6 +106,7 @@ dist
 
 # intellij
 *.iml
+.idea/
 
 tmp/
 build/
