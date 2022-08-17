@@ -2,8 +2,8 @@ platform:
   name: jfrog
 outputDir: generated
 contracts:
-  nrsApi:
+  nrsApiV1:
     type: provider
     boundedContext: nrs
-    name: nrsAPI
-    version: 1.0.0
+    name: nrsApi
+    version: 1.0.1

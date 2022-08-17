@@ -2,8 +2,8 @@ openapi: 3.0.0
 info:
   description: |
     OpenAPI specifications for nrsnumbers.net
-  version: "1.0.0"
-  title: NRS Numbers
+  version: '1.0.1'
+  title: '@ikigai-digital/nrs-api-server'
   termsOfService: 'http://swagger.io/terms/'
   contact:
     email: numbersnrs@gmail.com
@@ -80,4 +80,4 @@ components:
         language:
           type: string
           description: User preferred language
-          example: "zh-HK"
+          example: 'zh-HK'
