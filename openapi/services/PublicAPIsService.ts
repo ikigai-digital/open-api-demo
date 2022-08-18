@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-const Service = require('../generated/provider/nrs/nrsApi/1.0.1/services/Service.js')
+import { Service } from 'ikigai-digital-nrs-api-server'
 
 /**
  * Return the locality's configuration
@@ -7,7 +6,7 @@ const Service = require('../generated/provider/nrs/nrsApi/1.0.1/services/Service
  * localityId BigDecimal
  * returns getLocalityConfig_200_response
  * */
-const getLocalityConfig = ({ localityId }) =>
+export const getLocalityConfig = ({ localityId }) =>
   new Promise(async (resolve, reject) => {
     try {
       resolve(
@@ -25,7 +24,7 @@ const getLocalityConfig = ({ localityId }) =>
  * user String
  * returns preferredLang
  * */
-const getUserPreferredLanguage = ({ user }) =>
+export const getUserPreferredLanguage = ({ user }) =>
   new Promise(async (resolve, reject) => {
     try {
       resolve(
@@ -37,8 +36,3 @@ const getUserPreferredLanguage = ({ user }) =>
       reject(Service.rejectResponse(e.message || 'Invalid input', e.status || 405))
     }
   })
-
-module.exports = {
-  getLocalityConfig,
-  getUserPreferredLanguage,
-}

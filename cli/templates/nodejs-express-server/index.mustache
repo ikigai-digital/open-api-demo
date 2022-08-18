@@ -1,16 +1,7 @@
-const config = require('./config');
-const logger = require('./logger');
-const ExpressServer = require('./expressServer');
+const Controller = require('./controllers/Controller');
+const Service = require('./services/Service');
 
-const launchServer = async () => {
-  try {
-    this.expressServer = new ExpressServer(config.URL_PORT, config.OPENAPI_YAML);
-    this.expressServer.launch();
-    logger.info('Express server running');
-  } catch (error) {
-    logger.error('Express Server failure', error.message);
-    await this.close();
-  }
+module.exports = {
+  Controller,
+  Service
 };
-
-launchServer().catch(e => logger.error(e));

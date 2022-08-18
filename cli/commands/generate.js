@@ -26,21 +26,32 @@ const JFROG_API_KEY = process.env.JFROG_API_KEY
 
 const DEFAULT_OUTPUT_DIR = './generated'
 const TMP_DIR = 'tmp'
+const TEMPLATE_DIR = 'node_modules/openapi/templates/nodejs-express-server'
 const REQUIRED_CONTRACT_FIELDS = ['type', 'boundedContext', 'name', 'version']
 const CONTRACT_TYPES = ['provider', 'client']
 
 const generateSingleFile = async ({ filePath, type, buildDir, name }) => {
   try {
     const generatorType = type === 'provider' ? 'nodejs-express-server' : 'typescript-axios'
+    const { stdout: globalNpmLocation } = await execAsync('npm list -g | head -1')
+
     console.log({
       filePath,
       type,
       buildDir,
+      globalNpmLocation,
       name,
     })
 
+    const templateDir = join(globalNpmLocation.replace('\n', ''), TEMPLATE_DIR)
+
+    const additionalArgs =
+      type === 'provider'
+        ? `-t ${templateDir}`
+        : '--additional-properties=npmName=@ikigai-digital/${name},npmRepository=https://idigital.jfrog.io/artifactory/api/npm/shared-npm,supportsES6=false,withInterfaces=true --git-repo-id open-api-demo --git-user-id ikigai-digital'
+
     const { stdout, stderr } = await execAsync(
-      `npx @openapitools/openapi-generator-cli generate -i ${filePath} -g ${generatorType} -o ${buildDir}  --additional-properties=npmName=@ikigai-digital/${name},npmRepository=https://idigital.jfrog.io/artifactory/api/npm/shared-npm,supportsES6=false,withInterfaces=true --git-repo-id open-api-demo --git-user-id ikigai-digital`,
+      `npx @openapitools/openapi-generator-cli generate -i ${filePath} -g ${generatorType} -o ${buildDir} ${additionalArgs}`,
     )
 
     if (stderr) {
