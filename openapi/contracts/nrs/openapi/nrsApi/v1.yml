@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   description: |
     OpenAPI specifications for nrsnumbers.net
-  version: '1.0.2'
+  version: '1.0.3'
   title: '@ikigai-digital/nrs-api-server'
   termsOfService: 'http://swagger.io/terms/'
   contact:
@@ -11,9 +11,9 @@ info:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
 servers:
-  - url: 'https://nrsnumbers.net/api'
+  - url: 'https://nrsnumbers.net/v1/api'
     description: Production
-  - url: 'https://localhost:5001/api'
+  - url: 'https://localhost:5001/v1/api'
     description: Local
 tags:
   - name: publicAPIs

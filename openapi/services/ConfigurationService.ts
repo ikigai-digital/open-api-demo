@@ -1,4 +1,4 @@
-import { BaseService } from '../generated/provider/nrs/nrsApi/1.0.2'
+import { BaseService } from '../generated/provider/nrs/nrsApi/1.0.3'
 
 /**
  * Return the locality's configuration

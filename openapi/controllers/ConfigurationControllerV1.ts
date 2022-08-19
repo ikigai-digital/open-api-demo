@@ -1,4 +1,4 @@
-import { BaseController } from '../generated/provider/nrs/nrsApi/1.0.2'
+import { BaseController } from '../generated/provider/nrs/nrsApi/1.0.3'
 
 import { getLocalityConfig as getLocalityConfigService } from '../services/ConfigurationService'
 
