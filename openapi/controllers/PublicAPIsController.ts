@@ -1,4 +1,4 @@
-import { Controller } from 'ikigai-digital-nrs-api-server'
+import { Controller } from '../generated/provider/nrs/nrsApi/1.0.1'
 
 import * as Services from '../services/PublicAPIsService'
 

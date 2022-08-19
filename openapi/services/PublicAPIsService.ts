@@ -1,4 +1,4 @@
-import { Service } from 'ikigai-digital-nrs-api-server'
+import { Service } from '../generated/provider/nrs/nrsApi/1.0.1'
 
 /**
  * Return the locality's configuration
