@@ -10,7 +10,7 @@ app.use(express.text())
 app.use(express.urlencoded({ extended: false }))
 
 const port = 3000
-const apiSpec = path.join(__dirname, './generated/provider/nrs/nrsApi/1.0.1/api', 'openapi.yaml')
+const apiSpec = path.join(__dirname, './generated/provider/nrs/nrsApi/1.0.2/api', 'openapi.yaml')
 const operationHandlers = path.join(__dirname)
 
 console.log({ apiSpec, operationHandlers })

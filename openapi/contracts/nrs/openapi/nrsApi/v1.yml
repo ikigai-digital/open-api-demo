@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   description: |
     OpenAPI specifications for nrsnumbers.net
-  version: '1.0.1'
+  version: '1.0.2'
   title: '@ikigai-digital/nrs-api-server'
   termsOfService: 'http://swagger.io/terms/'
   contact:
@@ -22,7 +22,7 @@ paths:
   /accounts/{user}/preferredLanguage:
     get:
       tags:
-        - publicAPIs
+        - preferredLang
       parameters:
         - name: user
           in: path
@@ -42,7 +42,7 @@ paths:
   /localities/{localityId}/configurations:
     get:
       tags:
-        - publicAPIs
+        - configuration
       parameters:
         - name: localityId
           in: path

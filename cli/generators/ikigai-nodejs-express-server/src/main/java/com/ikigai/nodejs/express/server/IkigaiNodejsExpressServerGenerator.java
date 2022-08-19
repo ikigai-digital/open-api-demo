@@ -263,7 +263,6 @@ public class IkigaiNodejsExpressServerGenerator extends DefaultCodegen implement
           opsByPathList.add(opsByPathEntry);
           opsByPathEntry.put("path", entry.getKey());
           opsByPathEntry.put("operation", entry.getValue());
-          List<CodegenOperation> operationsForThisPath = Lists.newArrayList(entry.getValue());
       }
 
       return opsByPathList;
@@ -281,16 +280,6 @@ public class IkigaiNodejsExpressServerGenerator extends DefaultCodegen implement
       if (additionalProperties.containsKey(EXPORTED_NAME)) {
           setExportedName((String) additionalProperties.get(EXPORTED_NAME));
       }
-
-      /*
-       * Supporting Files.  You can write single files for the generator with the
-       * entire object tree available.  If the input file has a suffix of `.mustache
-       * it will be processed by the template engine.  Otherwise, it will be copied
-       */
-      // supportingFiles.add(new SupportingFile("controller.mustache",
-      //   "controllers",
-      //   "controller.js")
-      // );
   }
 
   @Override
@@ -322,6 +311,7 @@ public class IkigaiNodejsExpressServerGenerator extends DefaultCodegen implement
                       HttpMethod method = operationMapEntry.getKey();
                       Operation operation = operationMapEntry.getValue();
                       String tag = "default";
+                      String displayVersion = "V" + openAPI.getInfo().getVersion().charAt(0);
                       if (operation.getTags() != null && operation.getTags().size() > 0) {
                           tag = toApiName(operation.getTags().get(0));
                       }
@@ -330,7 +320,7 @@ public class IkigaiNodejsExpressServerGenerator extends DefaultCodegen implement
                       }
                       if (operation.getExtensions() == null ||
                               operation.getExtensions().get("x-eov-operation-handler") == null) {
-                          operation.addExtension("x-eov-operation-handler", "controllers/" + sanitizeTag(tag) + "Controller");
+                          operation.addExtension("x-eov-operation-handler", "controllers/" + sanitizeTag(tag) + "Controller" + displayVersion);
                       }
                   }
               }
