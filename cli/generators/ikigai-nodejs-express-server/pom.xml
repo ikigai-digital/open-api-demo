@@ -112,17 +112,6 @@
             <artifactId>openapi-generator</artifactId>
             <version>${openapi-generator-version}</version>
             <scope>provided</scope>
-            <executions>
-                <execution>
-                    <id>generate-server-code</id>
-                    <goals>
-                        <goal>generate</goal>
-                    </goals>
-                    <configuration>
-                        <generatorName>ikigai-nodejs-express-server</generatorName>
-                    </configuration>
-                </execution>
-            </executions>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -135,6 +124,5 @@
         <openapi-generator-version>6.0.1</openapi-generator-version>
         <maven-plugin-version>1.0.0</maven-plugin-version>
         <junit-version>4.13.2</junit-version>
-        <skipTests>true</skipTests>
     </properties>
 </project>
