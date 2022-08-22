@@ -11,6 +11,7 @@ import {
   NO_VERSION_BUMP,
   SPEC_DELETED,
   INVALID_VERSION_BUMP,
+  INVALID_SERVER_URL,
 } from '../constants/errors.js'
 import { logger } from '../utils/logger.js'
 
@@ -67,7 +68,7 @@ const validateSingleVersionBump = async (filePaths) => {
         throw Error(NO_VERSION_BUMP)
       }
 
-      if (!semver.valid(newVersion) || semver.lt(oldVersion, newVersion)) {
+      if (semver.valid(newVersion) === null || !semver.gt(newVersion, oldVersion)) {
         logger.error(`Invalid version bump detected in ${filePaths.relativeFile}`)
         logger.info(
           'Version bump needs to be a valid semver version and greater than the previous version',
@@ -75,6 +76,19 @@ const validateSingleVersionBump = async (filePaths) => {
         logger.info({ newVersion, oldVersion })
 
         throw Error(INVALID_VERSION_BUMP)
+      }
+
+      // Ensuring servers have contract version in URL
+      const major = `/v${semver.major(newVersion)}/`
+      const { servers } = parsedDestYaml
+
+      for (const server of servers) {
+        if (!server.url.toLowerCase().includes(major)) {
+          logger.error(
+            `Invalid server url ${server.url} detected. Server url should include ${major}`,
+          )
+          throw Error(INVALID_SERVER_URL)
+        }
       }
     }
 
