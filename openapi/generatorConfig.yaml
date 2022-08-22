@@ -7,3 +7,8 @@ contracts:
     boundedContext: nrs
     name: nrsApi
     version: 1.0.3
+  nrsApiV2:
+    type: provider
+    boundedContext: nrs
+    name: nrsApi
+    version: 2.0.0
