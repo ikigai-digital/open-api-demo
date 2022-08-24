@@ -107,3 +107,5 @@ dist
 generated/
 tmp/
 build/
+
+.npmrc
