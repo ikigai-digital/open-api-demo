@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import SwaggerUIReact from 'swagger-ui-react'
+import { SwaggerUIBundle, SwaggerUIStandalonePreset } from 'swagger-ui-dist'
+import 'swagger-ui-react/swagger-ui.css'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-
-export default App;
+export const App = () => (
+  <SwaggerUIReact
+    url="https://petstore.swagger.io/v2/swagger.json"
+    // @ts-ignore
+    urls={[
+      {
+        url: 'specs/petstoreV1.json',
+        name: 'PetstoreV1',
+      },
+      {
+        url: 'specs/petstoreV2.json',
+        name: 'PetstoreV2',
+      },
+    ]}
+    deepLinking
+    // @ts-ignore
+    presets={[SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset.SwaggerUIStandalonePreset]}
+    // @ts-ignore
+    plugins={[SwaggerUIBundle.plugins.DownloadUrl]}
+    layout="StandaloneLayout"
+  />
+)
