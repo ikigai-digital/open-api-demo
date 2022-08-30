@@ -1,0 +1,1 @@
+export { SidebarPlugin } from './Sidebar'

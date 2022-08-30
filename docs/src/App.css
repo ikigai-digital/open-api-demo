@@ -1,5 +1,6 @@
 .swagger-ui .topbar {
   background-color: #051651;
+  box-shadow: rgba(100, 100, 111, 0.6) 0px 7px 29px 0px;
 }
 
 .swagger-ui .topbar .download-url-wrapper .select-label select {

@@ -1,0 +1,51 @@
+.sidebar {
+  background-color: #051651;
+  flex: 0 0 250px;
+  padding: 32px;
+}
+
+.contentContainer .swagger-ui {
+  flex: 1;
+}
+
+ul.boundedContextList {
+  list-style: none;
+  padding: 0;
+  color: white;
+}
+
+ul.boundedContextList > li {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+ul.boundedContextList > li > h4 {
+  margin: 0;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.apiList {
+  list-style: none;
+  padding: 0;
+  padding-left: 32px;
+}
+
+ul.apiList > li {
+  font-weight: normal;
+  line-height: 22px;
+  font-size: 16px;
+  text-transform: none;
+}
+
+ul.apiList > li > p {
+  margin: 0 6px;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+ul.apiList > li > p.isSelected {
+  font-weight: bolder;
+  opacity: 1;
+}
