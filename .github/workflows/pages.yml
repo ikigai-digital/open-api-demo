@@ -41,7 +41,7 @@ jobs:
           directory: docs
       - name: Install JS dependencies
         working-directory: docs
-        run: yarn install
+        run: yarn install --frozen-lockfile
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
