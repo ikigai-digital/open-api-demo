@@ -2,6 +2,7 @@ import get from 'lodash/get'
 import groupBy from 'lodash/groupBy'
 import React, { cloneElement, useState, useEffect, useMemo, useCallback } from 'react'
 
+import logo from '../assets/images/ikigai_logo.webp'
 import { parseSearch, serializeSearch } from '../utils/urls'
 import {
   AuthActions,
@@ -106,9 +107,6 @@ export const TopNavBar: React.FC<Props> = ({
 
   if (urls) {
     const sections = groupBy(urls, (url) => get(url, 'boundedContext', 'Others'))
-    // groupBy(urls, 'boundedContext')
-    // const sectionComp
-    console.log({ sections })
 
     control.push(
       <label className="select-label" htmlFor="select">
@@ -136,7 +134,7 @@ export const TopNavBar: React.FC<Props> = ({
     <div className="topbar">
       <div className="wrapper">
         <div className="topbar-wrapper">
-          <img height={60} src="/ikigai_logo.webp" alt="Ikigai Logo" />
+          <img height={60} src={logo} alt="Ikigai Logo" />
           <form className="download-url-wrapper">
             {control.map((el, i) => cloneElement(el, { key: i }))}
           </form>
