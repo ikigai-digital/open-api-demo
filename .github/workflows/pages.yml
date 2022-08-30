@@ -37,12 +37,14 @@ jobs:
         with:
           node-version: 16
       - uses: c-hive/gha-yarn-cache@v2
+        with:
+          directory: docs
       - name: Install JS dependencies
-        run: cd docs/ && yarn install
+        working-directory: docs
+        run: yarn install
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          # Upload entire repository
           path: 'docs/build'
       - name: Deploy to GitHub Pages
         id: deployment
