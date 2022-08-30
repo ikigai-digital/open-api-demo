@@ -1,0 +1,12 @@
+diff --git a/node_modules/@types/swagger-ui/index.d.ts b/node_modules/@types/swagger-ui/index.d.ts
+index bde7f5a..016ef6f 100755
+--- a/node_modules/@types/swagger-ui/index.d.ts
++++ b/node_modules/@types/swagger-ui/index.d.ts
+@@ -40,6 +40,7 @@ declare namespace SwaggerUI {
+         urls?: Array<{
+             url: string;
+             name: string;
++            boundedContext?: string;
+         }> | undefined;
+ 
+         // Plugin system

@@ -1,0 +1,83 @@
+openapi: 3.0.0
+info:
+  description: |
+    OpenAPI specifications for nrsnumbers.net
+  version: '1.0.3'
+  title: '@ikigai-digital/nrs-api-server'
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email: numbersnrs@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+servers:
+  - url: 'https://nrsnumbers.net/v1/api'
+    description: Production
+  - url: 'https://localhost:5001/v1/api'
+    description: Local
+tags:
+  - name: publicAPIs
+    description: NRS APIs for public access
+paths:
+  /accounts/{user}/preferredLanguage:
+    get:
+      tags:
+        - preferredLang
+      parameters:
+        - name: user
+          in: path
+          required: true
+          schema:
+            type: string
+            example: abchiu
+      summary: Return the user's preferred language
+      operationId: getUserPreferredLanguage
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/preferredLang'
+  /localities/{localityId}/configurations:
+    get:
+      tags:
+        - configuration
+      parameters:
+        - name: localityId
+          in: path
+          required: true
+          schema:
+            type: number
+            example: 4
+      summary: Return the locality's configuration
+      operationId: getLocalityConfig
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  baptizedStatusId:
+                    type: number
+                    description: Attendee Status - Baptized
+                    example: 3
+                  city:
+                    type: number
+                    description: City Id
+                    example: 1
+                  localityTranslations:
+                    type: string
+                    description: Translations available for locality
+                    example: 'zh-HK,en-US'
+components:
+  schemas:
+    preferredLang:
+      type: object
+      properties:
+        language:
+          type: string
+          description: User preferred language
+          example: 'zh-HK'

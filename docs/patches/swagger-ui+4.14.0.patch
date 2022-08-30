@@ -1,0 +1,12 @@
+diff --git a/node_modules/swagger-ui/package.json b/node_modules/swagger-ui/package.json
+index 3d7a7fa..8473151 100644
+--- a/node_modules/swagger-ui/package.json
++++ b/node_modules/swagger-ui/package.json
+@@ -6,6 +6,7 @@
+   "exports": {
+     "./dist/swagger-ui.css": "./dist/swagger-ui.css",
+     "./dist/oauth2-redirect.html": "./dist/oauth2-redirect.html",
++    "./dist/swagger-ui-standalone-preset": "./dist/swagger-ui-standalone-preset.js",
+     ".": {
+       "import": "./dist/swagger-ui-es-bundle-core.js",
+       "require": "./dist/swagger-ui.js"
