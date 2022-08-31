@@ -1,6 +1,6 @@
 .sidebar {
+  display: flex;
   background-color: #051651;
-  flex: 0 0 250px;
   padding: 32px;
 }
 
@@ -48,4 +48,10 @@ ul.apiList > li > p {
 ul.apiList > li > p.isSelected {
   font-weight: bolder;
   opacity: 1;
+}
+
+@media only screen and (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
 }
