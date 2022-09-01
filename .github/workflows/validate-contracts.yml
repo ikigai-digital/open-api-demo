@@ -1,8 +1,6 @@
 name: "Validate specs format and bump"
 
 on:
-  push:
-    branches-ignore: [main]
   pull_request:
     branches: []
 
