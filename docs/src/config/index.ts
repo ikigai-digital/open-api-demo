@@ -10,25 +10,9 @@ export const config = {
       name: 'InventoryApiV2',
       boundedContext: 'inventory',
     },
-    {
-      url: 'specs/nrs/openapi/nrsApi/v1.yml',
-      name: 'NrsApiV1',
-      boundedContext: 'nrs',
-    },
-    {
-      url: 'specs/nrs/openapi/nrsApi/v2.yml',
-      name: 'NrsApiV2',
-      boundedContext: 'nrs',
-    },
-    {
-      url: 'specs/pet/openapi/petApi/v1.yml',
-      name: 'PetApiV1',
-      boundedContext: 'pet',
-    },
-    {
-      url: 'specs/planet/openapi/planetApi/v1.yml',
-      name: 'PlanetApiV1',
-      boundedContext: 'planet',
-    },
+    { url: 'specs/nrs/openapi/nrsApi/v1.yml', name: 'NrsApiV1', boundedContext: 'nrs' },
+    { url: 'specs/nrs/openapi/nrsApi/v2.yml', name: 'NrsApiV2', boundedContext: 'nrs' },
+    { url: 'specs/pet/openapi/petApi/v1.yml', name: 'PetApiV1', boundedContext: 'pet' },
+    { url: 'specs/planet/openapi/planetApi/v1.yml', name: 'PlanetApiV1', boundedContext: 'planet' },
   ],
 }

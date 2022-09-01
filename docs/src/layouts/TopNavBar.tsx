@@ -2,7 +2,7 @@ import get from 'lodash/get'
 import groupBy from 'lodash/groupBy'
 import React, { cloneElement, useEffect } from 'react'
 
-import logo from '../assets/images/ikigai_logo.webp'
+import logo from '../assets/images/logo.png'
 import { AuthActions, GetConfigs, SpecActions, SpecSelectors, Url } from '../types/SwaggerUILayout'
 import { useChangeUrl } from '../hooks/useChangeUrl'
 
@@ -81,7 +81,7 @@ export const TopNavBar: React.FC<Props> = ({
     <div className="topbar">
       <div className="wrapper">
         <div className="topbar-wrapper">
-          <img height={80} src={logo} alt="Ikigai Logo" />
+          <img height={40} src={logo} alt="Ikigai Logo" />
           <form className="download-url-wrapper">
             {control.map((el, i) => cloneElement(el, { key: i }))}
           </form>

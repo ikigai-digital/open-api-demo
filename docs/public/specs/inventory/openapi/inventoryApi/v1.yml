@@ -6,7 +6,7 @@ servers:
 info:
   description: This is a simple API
   version: '1.0.4'
-  title: '@ikigai-digital/inventory-api-server'
+  title: Simple Inventory API
   contact:
     email: you@your-company.com
   license:

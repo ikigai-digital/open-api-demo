@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: '@ikigai-digital/planet-api-server'
+  title: Planets and Webhooks Demo API
   version: 0.0.1
   description: Simple flask-backed API showing some example API endpoints and with webhook debugging features.
   contact:
@@ -29,7 +29,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/planet'
+                  $ref: "#/components/schemas/planet"
 
   /planets/{planetId}:
     get:
@@ -52,7 +52,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/planet'
+                $ref: "#/components/schemas/planet"
 
 components:
   schemas:
@@ -62,7 +62,7 @@ components:
         name:
           type: string
           description: Name of planet
-          example: 'Saturn'
+          example: "Saturn"
         position:
           type: number
           description: Order in place from the sun
@@ -71,6 +71,7 @@ components:
           type: number
           description: Number of moons, according to NASA
           example: 62
+
 
 tags:
   - name: planets
