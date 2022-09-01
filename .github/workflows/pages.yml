@@ -39,6 +39,17 @@ jobs:
       - uses: c-hive/gha-yarn-cache@v2
         with:
           directory: docs
+      - name: 'Create .npmrc'
+        shell: bash
+        run: |
+          echo "_auth = ${{ secrets.JFROG_NPM_AUTH_TOKEN }}" >> .npmrc
+          echo "email = ${{ secrets.JFROG_NPM_AUTH_EMAIL }}" >> .npmrc
+          echo "always-auth = true" >> .npmrc
+          echo "registry = ${{ secrets.JFROG_REGISTRY_URL }}" >> .npmrc
+      - name: 'Install openapi-cli'
+        run: npm install -g @ikigai-digital/openapi-cli
+      - name: 'Generate config and copy specs'
+        run: openapi generate-docs -d docs -c openapi/contracts -o "Ikigai Digital" -h "https://ikigai-digital.github.io/open-api-demo"
       - name: Install JS dependencies
         working-directory: docs
         run: yarn install --frozen-lockfile

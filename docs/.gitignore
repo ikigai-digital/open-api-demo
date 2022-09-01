@@ -10,6 +10,8 @@
 
 # production
 /build
+/public/specs
+/src/config/index.ts
 
 # misc
 .DS_Store
