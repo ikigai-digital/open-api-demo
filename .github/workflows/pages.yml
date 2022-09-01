@@ -36,9 +36,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-      - uses: c-hive/gha-yarn-cache@v2
-        with:
-          directory: docs
       - name: 'Create .npmrc'
         shell: bash
         run: |
