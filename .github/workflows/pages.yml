@@ -36,15 +36,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: 'Create .npmrc'
-        shell: bash
-        run: |
-          echo "_auth = ${{ secrets.JFROG_NPM_AUTH_TOKEN }}" >> ~/.npmrc
-          echo "email = ${{ secrets.JFROG_NPM_AUTH_EMAIL }}" >> ~/.npmrc
-          echo "always-auth = true" >> ~/.npmrc
-          echo "registry = ${{ secrets.JFROG_REGISTRY_URL }}" >> ~/.npmrc
-      - name: 'Install openapi-cli'
-        run: npm install -g @ikigai-digital/openapi-cli
+      - uses: actions/setup-openapi-cli-action@v1.0.0
+        with:
+          auth-token: ${{ secrets.JFROG_NPM_AUTH_TOKEN }}
+          auth-email: ${{ secrets.JFROG_NPM_AUTH_EMAIL }}
+          registry: ${{ secrets.JFROG_REGISTRY_URL }}
       - name: 'Generate config and copy specs'
         run: openapi generate-docs -d docs -c openapi/contracts -o "Ikigai Digital" -h "https://ikigai-digital.github.io/open-api-demo"
       - name: Install JS dependencies
