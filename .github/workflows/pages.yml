@@ -36,7 +36,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-      - uses: actions/setup-openapi-cli-action@v1.0.0
+      - uses: ikigai-digital/setup-openapi-cli-action@v1.0.0
         with:
           auth-token: ${{ secrets.JFROG_NPM_AUTH_TOKEN }}
           auth-email: ${{ secrets.JFROG_NPM_AUTH_EMAIL }}
