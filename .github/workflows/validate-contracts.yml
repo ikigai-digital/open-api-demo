@@ -2,9 +2,9 @@ name: "Validate specs format and bump"
 
 on:
   push:
-    branches: [main]
+    branches-ignore: [main]
   pull_request:
-    branches: [main]
+    branches: []
 
 jobs:
   validate-openapi-specs:
