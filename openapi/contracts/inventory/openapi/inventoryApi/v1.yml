@@ -5,7 +5,6 @@ servers:
     url: https://virtserver.swaggerhub.com/Z9527/ZDaySample/1.0.0
 info:
   description: This is a simple API
-  version: '1.0.4'
   title: Simple Inventory API
   contact:
     email: you@your-company.com
