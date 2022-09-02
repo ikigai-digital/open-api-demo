@@ -2,7 +2,7 @@ openapi: 3.0.1
 servers:
   # Added by API Auto Mocking Plugin
   - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/Z9527/ZDaySample/1.0.0
+    url: https://virtserver.swaggerhub.com/v1/api
 info:
   description: This is a simple API
   version: '1.0.5'
