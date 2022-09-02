@@ -1,14 +1,14 @@
 openapi: 3.0.3
 info:
-  title: Planets and Webhooks Demo API
-  version: 0.0.1
+  title: '@ikigai-digital/planet-api-server'
+  version: 1.0.0
   description: Simple flask-backed API showing some example API endpoints and with webhook debugging features.
   contact:
     name: Lorna Mitchell
     url: https://github.com/lornajane/flask-planets-and-webhooks
     email: github@lornajane.net
 servers:
-  - url: http://localhost:5000
+  - url: http://localhost:5000/v1
     description: Sample project running locally
 externalDocs:
   description: GitHub project for the code and information about this API

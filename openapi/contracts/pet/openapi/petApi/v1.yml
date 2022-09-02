@@ -1,12 +1,12 @@
 openapi: 3.0.0
 servers:
-  - url: 'http://petstore.swagger.io/v2'
+  - url: 'http://petstore.swagger.io/v1'
 info:
   description: >-
     This is a sample server Petstore server. For this sample, you can use the api key
     `special-key` to test the authorization filters.
-  version: 1.0.0
-  title: OpenAPI Petstore
+  version: 1.0.1
+  title: '@ikigai-digital/petstore-api-server'
   license:
     name: Apache-2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
