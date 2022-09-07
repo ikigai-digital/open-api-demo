@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   description: |
     OpenAPI specifications for nrsnumbers.net
-  version: '1.0.3'
+  version: '1.0.4'
   title: '@ikigai-digital/nrs-api-server'
   termsOfService: 'http://swagger.io/terms/'
   contact:
