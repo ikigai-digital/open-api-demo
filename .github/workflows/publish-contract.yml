@@ -1,0 +1,29 @@
+name: "Publish changed contracts from last commit"
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  validate-openapi-specs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: '0'
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - uses: ikigai-digital/setup-openapi-cli-action@v1.0.0
+        with:
+          auth-token: ${{ secrets.JFROG_NPM_AUTH_TOKEN }}
+          auth-email: ${{ secrets.JFROG_NPM_AUTH_EMAIL }}
+          registry: ${{ secrets.JFROG_REGISTRY_URL }}
+      - name: Publish changed openapi specs from last commit
+        run: openapi publish -d -m
+        env:
+          JFROG_USERNAME: '${{ secrets.JFROG_USERNAME }}'
+          JFROG_API_KEY: '${{ secrets.JFROG_API_KEY }}'
