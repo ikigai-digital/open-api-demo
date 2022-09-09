@@ -1,0 +1,479 @@
+openapi: 3.0.1
+servers:
+  - description: Cards Servers
+    url: https://localhost:5001/cards/v1
+info:
+  description: Core banking system transaction posting API specifications
+  version: '1.0.0'
+  title: Cards Posting API
+tags:
+  - name: Account Debits
+    description: API to perform account debit
+  - name: Debit Reversal
+    description: After transaction occurred and customer dispute a payment, the debit reversal api will be in used. PS - payment has not been deposited into the account.
+  - name: Balance Inquiry
+    description: Inquire the account balance for 1 user
+  - name: Refund
+    description: Perform a refund after the payment has been deposited into the account.
+paths:
+  /debit:
+    post:
+      tags:
+        - AccountDebits
+      summary: Debit Account
+      operationId: debitAccount
+      description: |
+        Creates a TM posting for debit account
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EuronetApiResponse'
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EuronetApiErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EuronetApiRequest'
+        description: Debit Account API Request
+  /reversal:
+    post:
+      tags:
+        - DebitReversal
+      summary: Reversal Account
+      operationId: reversalAccount
+      description: |
+        Creates a TM posting for reversal account
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EuronetApiResponse'
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EuronetApiErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EuronetApiRequest'
+        description: Reversal Account API Request
+  /balances:
+    post:
+      tags:
+        - BalanceInquiry
+      summary: Balance Account
+      operationId: balanceAccount
+      description: |
+        Get the Balance of the account
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EuronetApiResponse'
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EuronetApiErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EuronetApiRequest'
+        description: Balance Account API Request
+  /refund:
+    post:
+      tags:
+        - Refund
+      summary: Refund Account
+      operationId: refundAccount
+      description: |
+        Creates a TM posting for reversal account
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EuronetApiResponse'
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EuronetApiErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EuronetApiRequest'
+        description: Refund Account API Request
+components:
+  schemas:
+    EuronetApiRequest:
+      type: object
+      required:
+        - packageType
+        - partID
+        - serviceName
+        - channelID
+        - userId
+        - reqID
+        - reqDateTime
+        - mti
+        - proxyNumber
+        - processingCode
+        - transactionAmount
+        - transmissionDateTime
+        - systemTraceAuditNumber
+        - merchantCategoryCode
+        - acquirerCountryCode
+        - panEntryMode
+        - networkId
+        - POSConditionCode
+        - acquirerID
+        - retrievalReferenceNumber
+        - cardAcceptorTerminalID
+        - cardAccptMerchantID
+        - cardAccptTermName
+        - transactionCurrencyCode
+        - transactionID
+        - ECOMIndicator
+        - CAVVUCAF
+        - 3dsIndicator
+        - PANValidation
+        - ExpiryDateValidation
+        - udNetworkSchemeId
+      properties:
+        packageType:
+          type: string
+          maxLength: 10
+        partID:
+          type: string
+          maxLength: 3
+        serviceName:
+          type: string
+          maxLength: 15
+        channelID:
+          type: string
+          maxLength: 2
+        userId:
+          type: string
+          maxLength: 10
+        reqID:
+          type: string
+          maxLength: 40
+        reqDateTime:
+          type: string
+          maxLength: 20
+        mti:
+          type: string
+          maxLength: 4
+        proxyNumber:
+          type: string
+          maxLength: 9
+        processingCode:
+          type: string
+          maxLength: 6
+        transactionAmount:
+          type: number
+          maxLength: 12
+        cardholderBillingAmount:
+          type: number
+          maxLength: 12
+        transmissionDateTime:
+          type: number
+          maxLength: 10
+        systemTraceAuditNumber:
+          type: number
+          maxLength: 6
+        localTransactionTime:
+          type: number
+          maxLength: 6
+        localTransactionDate:
+          type: number
+          maxLength: 4
+        merchantCategoryCode:
+          type: number
+          maxLength: 4
+        acquirerCountryCode:
+          type: number
+          maxLength: 3
+        panEntryMode:
+          type: string
+          maxLength: 3
+        networkId:
+          type: string
+          maxLength: 3
+        POSConditionCode:
+          type: string
+          maxLength: 2
+        transactionsFee:
+          type: string
+          maxLength: 9
+        acquirerID:
+          type: string
+          maxLength: 11
+        retrievalReferenceNumber:
+          type: string
+          maxLength: 12
+        authID:
+          type: string
+          maxLength: 6
+        responseCode:
+          type: string
+          maxLength: 2
+        cardAcceptorTerminalID:
+          type: string
+          maxLength: 16
+        cardAccptMerchantID:
+          type: string
+          maxLength: 15
+        cardAccptTermName:
+          type: string
+          maxLength: 40
+        transactionCurrencyCode:
+          type: number
+          maxLength: 3
+        cardholderCurrencyCode:
+          type: number
+          maxLength: 3
+        transactionID:
+          type: string
+          maxLength: 15
+        ECOMIndicator:
+          type: string
+          maxLength: 2
+        CAVVUCAF:
+          type: string
+          maxLength: 2
+        3dsIndicator:
+          type: string
+          maxLength: 1
+        PANValidation:
+          type: string
+          maxLength: 1
+        ExpiryDateValidation:
+          type: string
+          maxLength: 1
+        pinValidation:
+          type: string
+          maxLength: 1
+        cvviCVVValidation:
+          type: string
+          maxLength: 1
+        cvv2Validation:
+          type: string
+          maxLength: 1
+        EMVValidation:
+          type: string
+          maxLength: 1
+        tokenizedTransactionIndicator:
+          type: string
+          maxLength: 1
+        BAIValue:
+          type: string
+          maxLength: 2
+        replacementAmount:
+          type: string
+          maxLength: 12
+        cardholderReplacementAmount:
+          type: string
+          maxLength: 12
+        incrementalAuthorisation:
+          type: number
+          maxLength: 4
+        udNetworkSchemeId:
+          type: string
+          maxLength: 20
+    EuronetApiResponse:
+      type: object
+      required:
+        - packageType
+        - partID
+        - serviceName
+        - channelID
+        - userId
+        - reqID
+        - reqDateTime
+        - mti
+        - proxyNumber
+        - processingCode
+        - transactionAmount
+        - transmissionDateTime
+        - systemTraceAuditNumber
+        - merchantCategoryCode
+        - acquirerCountryCode
+        - panEntryMode
+        - acquirerID
+        - retrievalReferenceNumber
+        - responseCode
+        - cardAcceptorTerminalID
+        - cardAccptMerchantID
+        - cardAccptTermName
+        - transactionCurrencyCode
+        - transactionID
+      properties:
+        packageType:
+          type: string
+          maxLength: 10
+        partID:
+          type: string
+          maxLength: 3
+        serviceName:
+          type: string
+          maxLength: 15
+        channelID:
+          type: string
+          maxLength: 2
+        userId:
+          type: string
+          maxLength: 10
+        reqID:
+          type: string
+          maxLength: 40
+        reqDateTime:
+          type: string
+          maxLength: 20
+        mti:
+          type: string
+          maxLength: 4
+        proxyNumber:
+          type: string
+          maxLength: 9
+        processingCode:
+          type: string
+          maxLength: 6
+        transactionAmount:
+          type: number
+          maxLength: 12
+        cardholderBillingAmount:
+          type: number
+          maxLength: 12
+        transmissionDateTime:
+          type: string
+          maxLength: 10
+        systemTraceAuditNumber:
+          type: number
+          maxLength: 6
+        localTransactionTime:
+          type: number
+          maxLength: 6
+        localTransactionDate:
+          type: number
+          maxLength: 4
+        merchantCategoryCode:
+          type: number
+          maxLength: 4
+        acquirerCountryCode:
+          type: number
+          maxLength: 3
+        panEntryMode:
+          type: string
+          maxLength: 3
+        acquirerID:
+          type: string
+          maxLength: 11
+        retrievalReferenceNumber:
+          type: string
+          maxLength: 12
+        authID:
+          type: string
+          maxLength: 6
+        responseCode:
+          type: string
+          maxLength: 2
+        cardAcceptorTerminalID:
+          type: string
+          maxLength: 16
+        cardAccptMerchantID:
+          type: string
+          maxLength: 15
+        cardAccptTermName:
+          type: string
+          maxLength: 40
+        transactionCurrencyCode:
+          type: number
+          maxLength: 3
+        cardholderCurrencyCode:
+          type: number
+          maxLength: 3
+        transactionID:
+          type: string
+          maxLength: 15
+    EuronetApiErrorResponse:
+      type: object
+      required:
+        - mti
+        - proxyNumber
+        - processingCode
+        - transactionAmount
+        - transmissionDateTime
+        - systemTraceAuditNumber
+        - localTransactionTime
+        - localTransactionDate
+        - acquirerID
+        - retrievalReferenceNumber
+        - authID
+        - cardAcceptorTerminalID
+        - cardAccptMerchantID
+        - responseCode
+      properties:
+        mti:
+          type: string
+          maxLength: 4
+        proxyNumber:
+          type: string
+          maxLength: 9
+        processingCode:
+          type: string
+          maxLength: 6
+        transactionAmount:
+          type: number
+          maxLength: 12
+        transmissionDateTime:
+          type: string
+          maxLength: 10
+        systemTraceAuditNumber:
+          type: number
+          maxLength: 6
+        localTransactionTime:
+          type: number
+          maxLength: 6
+        localTransactionDate:
+          type: number
+          maxLength: 4
+        acquirerID:
+          type: string
+          maxLength: 11
+        retrievalReferenceNumber:
+          type: string
+          maxLength: 12
+        authID:
+          type: string
+          maxLength: 6
+        cardAcceptorTerminalID:
+          type: string
+          maxLength: 16
+        cardAccptMerchantID:
+          type: string
+          maxLength: 15
+        responseCode:
+          type: string
+          maxLength: 2
