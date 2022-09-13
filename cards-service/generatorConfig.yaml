@@ -1,0 +1,9 @@
+platform:
+  name: jfrog
+outputDir: generated
+contracts:
+  cardsPostingApi:
+    type: provider
+    boundedContext: cards
+    name: cardsPostingApi
+    version: 1.0.0
