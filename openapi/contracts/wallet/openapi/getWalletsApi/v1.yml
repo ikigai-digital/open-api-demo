@@ -1,0 +1,92 @@
+openapi: 3.0.3
+info:
+  title: '@ikigai-digital/get-wallets-api'
+  version: 1.0.0
+  description: API to get users wallet information and list
+servers:
+  - url: http://localhost:5000/wallet-service/v1
+    description: Sample project running locally
+tags:
+  - name: GetWallets
+    description: API to get wallet list and info
+paths:
+  /wallets:
+    get:
+      operationId: getWallets
+      summary: List all wallets
+      description: Returns a list of all the wallet for an account number
+      tags:
+        - GetWallets
+      parameters:
+        - name: accountNumber
+          in: query
+          required: true
+          schema:
+            type: number
+            example: 1234
+      responses:
+        '200':
+          description: List of wallets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/wallet"
+
+components:
+  schemas:
+    wallet:
+      type: object
+      properties:
+        walletId:
+          type: string
+          description: Unique wallet ID
+          example: "123456-6789"
+        userId:
+          type: string
+          description: User ID the wallet belongs to
+          example: "123456-6789"
+        walletName:
+          type: string
+          description: Display name of the wallet
+          example: "Everyday wallet"
+        currentBalance:
+          type: number
+          description: Current balance of the wallet
+          example: 10
+        availableBalance:
+          type: number
+          description: Total available balance in the wallet
+          example: 12
+        minimumBalance:
+          type: number
+          description: Minimum balance allowed in the wallet
+          example: 5
+        currencyCode:
+          type: string
+          description: Currency code for the wallet
+          example: "PHP"
+        status:
+          type: string
+          description: Status of the wallet
+          example: "ACTIVE"
+        type:
+          type: string
+          description: Type of wallet
+          example: "BANK_WALLET"
+        isDefaultWallet:
+          type: boolean
+          description: If the wallet is a default wallet
+          example: false
+        expiredAt:
+          type: string
+          description: When the wallet will expiredAt
+          format: date-time
+          example: "2027-08-25T11:06:15.974"
+        createdAt:
+          type: string
+          description: When the wallet was created
+          format: date-time
+          example: "2022-08-25T11:06:15.986"
+        
