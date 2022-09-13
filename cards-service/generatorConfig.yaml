@@ -6,4 +6,9 @@ contracts:
     type: provider
     boundedContext: cards
     name: cardsPostingApi
+    version: 1.0.1
+  getWalletsApi:
+    type: client
+    boundedContext: wallet
+    name: getWalletsApi
     version: 1.0.0
