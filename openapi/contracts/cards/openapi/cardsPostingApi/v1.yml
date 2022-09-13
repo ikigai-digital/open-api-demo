@@ -4,14 +4,14 @@ servers:
     url: https://localhost:5001/cards/v1
 info:
   description: Core banking system transaction posting API specifications
-  version: '1.0.0'
-  title: Cards Posting API
+  version: '1.0.1'
+  title: '@ikigai-digital/cards-posting-api'
 tags:
-  - name: Account Debits
+  - name: AccountDebits
     description: API to perform account debit
-  - name: Debit Reversal
+  - name: DebitReversal
     description: After transaction occurred and customer dispute a payment, the debit reversal api will be in used. PS - payment has not been deposited into the account.
-  - name: Balance Inquiry
+  - name: BalanceInquiry
     description: Inquire the account balance for 1 user
   - name: Refund
     description: Perform a refund after the payment has been deposited into the account.
