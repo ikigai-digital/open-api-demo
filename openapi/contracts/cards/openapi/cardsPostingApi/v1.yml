@@ -4,7 +4,7 @@ servers:
     url: https://localhost:5001/cards/v1
 info:
   description: Core banking system transaction posting API specifications
-  version: '1.0.1'
+  version: '1.0.3'
   title: '@ikigai-digital/cards-posting-api'
 tags:
   - name: AccountDebits
