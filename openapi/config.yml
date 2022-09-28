@@ -1,0 +1,7 @@
+github:
+  branch: main
+artifactory:
+  name: jfrog
+  username: '${{ JFROG_USERNAME }}'
+  apiKey: '${{ JFROG_API_KEY }}'
+  url: 'https://idigital.jfrog.io/artifactory/contracts-generic-local/openapi'

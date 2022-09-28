@@ -1,6 +1,13 @@
-platform:
+artifactory:
   name: jfrog
+  username: '${{ JFROG_USERNAME }}'
+  apiKey: '${{ JFROG_API_KEY }}'
+  url: 'https://idigital.jfrog.io/artifactory/contracts-generic-local/openapi'
 outputDir: generated
+package:
+  scope: '@ikigai-digital'
+  repoId: 'open-api-demo'
+  gitUserId: 'ikigai-digital'
 contracts:
   cardsPostingApi:
     type: provider
