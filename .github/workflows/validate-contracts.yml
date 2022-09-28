@@ -22,6 +22,6 @@ jobs:
           auth-email: ${{ secrets.JFROG_NPM_AUTH_EMAIL }}
           registry: ${{ secrets.JFROG_REGISTRY_URL }}
       - name: Validate openapi spec format
-        run: openapi validate -d
+        run: openapi validate -d -c openapi/config.yml
       - name: Validate openapi changes
-        run: openapi validate-version-bump -d
+        run: openapi validate-version-bump -d -c openapi/config.yml

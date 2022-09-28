@@ -23,7 +23,7 @@ jobs:
           auth-email: ${{ secrets.JFROG_NPM_AUTH_EMAIL }}
           registry: ${{ secrets.JFROG_REGISTRY_URL }}
       - name: Publish changed openapi specs from last commit
-        run: openapi publish -d -m
+        run: openapi publish -d -m -c openapi/config.yml
         env:
           JFROG_USERNAME: '${{ secrets.JFROG_USERNAME }}'
           JFROG_API_KEY: '${{ secrets.JFROG_API_KEY }}'
