@@ -1,4 +1,4 @@
-name: "Validate specs format and bump"
+name: "Validate changed specs and publish snapshots"
 
 on:
   pull_request:
@@ -23,5 +23,7 @@ jobs:
           registry: ${{ secrets.JFROG_REGISTRY_URL }}
       - name: Validate openapi spec format
         run: openapi validate -d -c openapi/config.yml
+      - name: Publish snapshot without validating the bump
+        run: openapi publish -d -c openapi/config.yml -snapshot -snapshotBranchName ${{ github.ref_name }}
       - name: Validate openapi changes
         run: openapi validate-version-bump -d -c openapi/config.yml
