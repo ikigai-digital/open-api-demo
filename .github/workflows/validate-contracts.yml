@@ -25,5 +25,8 @@ jobs:
         run: openapi validate -d -c openapi/config.yml
       - name: Publish snapshot without validating the bump
         run: openapi publish -d -c openapi/config.yml -snapshot -snapshotBranchName ${{ github.ref_name }}
+        env:
+          JFROG_USERNAME: '${{ secrets.JFROG_USERNAME }}'
+          JFROG_API_KEY: '${{ secrets.JFROG_API_KEY }}'
       - name: Validate openapi changes
         run: openapi validate-version-bump -d -c openapi/config.yml
