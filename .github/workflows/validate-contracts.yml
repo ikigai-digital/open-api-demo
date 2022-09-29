@@ -16,6 +16,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
+      - uses: tj-actions/branch-names@v6
       - uses: ikigai-digital/setup-openapi-cli-action@v1.0.0
         with:
           auth-token: ${{ secrets.JFROG_NPM_AUTH_TOKEN }}
@@ -24,7 +25,7 @@ jobs:
       - name: Validate openapi spec format
         run: openapi validate -d -c openapi/config.yml
       - name: Publish snapshot without validating the bump
-        run: openapi publish -d -c openapi/config.yml -snapshot -snapshotBranchName ${{ github.ref_name }}
+        run: openapi publish -d -c openapi/config.yml -snapshot -snapshotBranchName ${{ steps.branch-name.outputs.current_branch }}
         env:
           JFROG_USERNAME: '${{ secrets.JFROG_USERNAME }}'
           JFROG_API_KEY: '${{ secrets.JFROG_API_KEY }}'
