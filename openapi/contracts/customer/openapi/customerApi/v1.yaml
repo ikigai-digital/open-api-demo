@@ -1,0 +1,166 @@
+openapi: "3.0.2"
+info:
+  title: Accelerator - Customer Reference Domain Implementation
+  description: Reference domain implementation for Customer Service.
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/MIT
+  version: "1.0"
+servers:
+  - url: /api/v1
+paths:
+  /customers:
+    get:
+      tags:
+        - getCustomers
+      summary: Get all customers.
+      description: Get all customers
+      operationId: getCustomers
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCustomerDtoResponse'
+    post:
+      tags:
+        - createCustomer
+      summary: Create new customer.
+      description: Create new customer.
+      operationId: createCustomer
+      requestBody:
+        description: Create new customer.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCustomerDto'
+        required: true
+      responses:
+        201:
+          description: Resource Created Successfully
+  /customers/{id}:
+    get:
+      tags:
+        - getCustomers
+      summary: Retrieve details of a particular customer.
+      description: Get customer detail by customer ID.
+      operationId: getCustomer
+      parameters:
+        - name: id
+          in: path
+          description: Customer ID.
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerDtoResponse'
+    put:
+      tags:
+        - updateCustomers
+      summary: Update a particular customer.
+      description: Update customer detail by customer ID.
+      operationId: updateCustomer
+      parameters:
+        - name: id
+          in: path
+          description: Customer ID.
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Update customer fields
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCustomerDto'
+      responses:
+        '200':
+          description: OK
+    delete:
+      tags:
+        - deleteCustomers
+      summary: Delete a particular customer.
+      description: Delete customer detail by customer ID.
+      operationId: deleteCustomer
+      parameters:
+        - name: id
+          in: path
+          description: Customer ID.
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Resource Deleted Successfully
+components:
+  schemas:
+    CreateCustomerDto:
+      required:
+        - name
+        - email
+      type: object
+      properties:
+        name:
+          type: string
+          example: Theo
+        email:
+          type: string
+          example: abc@gmail.com
+    UpdateCustomerDto:
+      required:
+        - name
+        - email
+      type: object
+      properties:
+        name:
+          type: string
+          example: Theo
+        email:
+          type: string
+          example: abc@gmail.com
+    GetCustomerDto:
+      required:
+        - id
+        - name
+        - tier
+        - points
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Theo
+        email:
+          type: string
+          example: abc@gmail.com
+        tier:
+          type: string
+          example: GOLD
+        points:
+          type: number
+          example: 350
+    CustomerDtoResponse:
+      required:
+        - customer
+      type: object
+      properties:
+        customer:
+          $ref: '#/components/schemas/GetCustomerDto'
+    ListCustomerDtoResponse:
+      required:
+        - customers
+      type: object
+      properties:
+        customers:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetCustomerDto'
