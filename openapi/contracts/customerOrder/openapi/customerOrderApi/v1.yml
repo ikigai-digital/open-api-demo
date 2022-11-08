@@ -29,7 +29,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomerOrderDtoResponse'
+                $ref: '#/components/schemas/MultipleCustomerOrderDtoResponse'
     post:
       tags:
         - CustomerOrder
@@ -51,7 +51,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomerOrderDtoResponse'
+                $ref: '#/components/schemas/SingleCustomerOrderDtoResponse'
   /customer-orders/{id}:
     get:
       tags:
@@ -72,7 +72,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomerOrderDtoResponse'
+                $ref: '#/components/schemas/SingleCustomerOrderDtoResponse'
 
 components:
   schemas:
@@ -96,7 +96,19 @@ components:
         price:
           type: number
           example: 123.1
-    CustomerOrderDtoResponse:
+    SingleCustomerOrderDtoResponse:
+      required:
+        - message
+        - customerOrder
+      type: object
+      properties:
+        message:
+            type: string
+            example: request processed successfully
+        customerOrder:
+            type: object
+            $ref: '#/components/schemas/CustomerOrderDto'
+    MultipleCustomerOrderDtoResponse:
       required:
         - message
         - customerOrders
