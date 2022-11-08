@@ -150,7 +150,7 @@ components:
           type: string
           example: GOLD
         points:
-          type: number
+          type: integer
           example: 350
     CustomerDtoResponse:
       required:
