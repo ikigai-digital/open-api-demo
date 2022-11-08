@@ -1,0 +1,123 @@
+openapi: "3.0.2"
+
+info:
+  title: Accelerator - Order Reference Domain Implementation
+  description: Reference domain implementation for Order Service.
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/MIT
+  version: "1.0"
+
+
+servers:
+  - url: /api
+
+
+paths:
+
+  /customer-orders:
+    get:
+      tags:
+        - CustomerOrder
+      summary: List all customer order information.
+      description: List details of all customer orders.
+      operationId: listOrder
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MultipleCustomerOrderDtoResponse'
+    post:
+      tags:
+        - CustomerOrder
+      summary: Create new customer order.
+      description: Create new customer order.
+      operationId: createOrder
+
+      requestBody:
+        description: Place new order.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerOrderDto'
+        required: true
+
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SingleCustomerOrderDtoResponse'
+  /customer-orders/{id}:
+    get:
+      tags:
+        - CustomerOrder
+      summary: Retrieve details of a particular customer order.
+      description: Get customer order detail by customer order ID.
+      operationId: getOrder
+      parameters:
+        - name: id
+          in: path
+          description: Customer order ID.
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SingleCustomerOrderDtoResponse'
+
+components:
+  schemas:
+    CustomerOrderDto:
+      required:
+        - orderNumber
+        - customerId
+        - price
+      type: object
+
+      properties:
+        id:
+          type: integer
+          example: 1001
+        orderNumber:
+          type: string
+          example: test-order-number-0001
+        customerId:
+          type: integer
+          example: 203
+        price:
+          type: number
+          example: 123.1
+    SingleCustomerOrderDtoResponse:
+      required:
+        - message
+        - customerOrder
+      type: object
+      properties:
+        message:
+            type: string
+            example: request processed successfully
+        customerOrder:
+            type: object
+            $ref: '#/components/schemas/CustomerOrderDto'
+    MultipleCustomerOrderDtoResponse:
+      required:
+        - message
+        - customerOrders
+      type: object
+      properties:
+        message:
+            type: string
+            example: request processed successfully
+        customerOrders:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerOrderDto'
