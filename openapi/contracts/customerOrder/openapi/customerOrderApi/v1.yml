@@ -86,12 +86,14 @@ components:
       properties:
         id:
           type: integer
+          format: int64
           example: 1001
         orderNumber:
           type: string
           example: test-order-number-0001
         customerId:
           type: integer
+          format: int64
           example: 203
         price:
           type: number
@@ -110,6 +112,7 @@ components:
           example: test-order-number-0001
         customerId:
           type: integer
+          format: int64
           example: 203
         price:
           type: number
