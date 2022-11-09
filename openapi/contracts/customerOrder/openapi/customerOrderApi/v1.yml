@@ -42,7 +42,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CustomerOrderDto'
+              $ref: '#/components/schemas/CreateOrderRequestDto'
         required: true
 
       responses:
@@ -96,6 +96,25 @@ components:
         price:
           type: number
           example: 123.1
+
+    CreateOrderRequestDto:
+      required:
+        - orderNumber
+        - customerId
+        - price
+      type: object
+
+      properties:
+        orderNumber:
+          type: string
+          example: test-order-number-0001
+        customerId:
+          type: integer
+          example: 203
+        price:
+          type: number
+          example: 123.1
+
     SingleCustomerOrderDtoResponse:
       required:
         - message
