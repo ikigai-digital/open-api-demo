@@ -42,7 +42,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateOrderRequestDto'
+              $ref: '#/components/schemas/CreateOrderRequest'
         required: true
 
       responses:
@@ -97,7 +97,7 @@ components:
           type: number
           example: 123.1
 
-    CreateOrderRequestDto:
+    CreateOrderRequest:
       required:
         - orderNumber
         - customerId
