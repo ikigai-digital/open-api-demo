@@ -22,7 +22,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListCustomerDtoResponse'
+                $ref: '#/components/schemas/ListCustomerResponse'
     post:
       tags:
         - createCustomer
@@ -34,7 +34,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateCustomerDto'
+              $ref: '#/components/schemas/CreateCustomerRequest'
         required: true
       responses:
         201:
@@ -60,7 +60,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomerDtoResponse'
+                $ref: '#/components/schemas/GetCustomerResponse'
     put:
       tags:
         - updateCustomers
@@ -81,7 +81,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateCustomerDto'
+              $ref: '#/components/schemas/UpdateCustomerRequest'
       responses:
         '200':
           description: OK
@@ -104,7 +104,7 @@ paths:
           description: Resource Deleted Successfully
 components:
   schemas:
-    CreateCustomerDto:
+    CreateCustomerRequest:
       required:
         - name
         - email
@@ -116,7 +116,7 @@ components:
         email:
           type: string
           example: abc@gmail.com
-    UpdateCustomerDto:
+    UpdateCustomerRequest:
       required:
         - name
         - email
@@ -128,7 +128,7 @@ components:
         email:
           type: string
           example: abc@gmail.com
-    GetCustomerDto:
+    GetCustomerResponse:
       required:
         - id
         - name
@@ -152,14 +152,7 @@ components:
         points:
           type: integer
           example: 350
-    CustomerDtoResponse:
-      required:
-        - customer
-      type: object
-      properties:
-        customer:
-          $ref: '#/components/schemas/GetCustomerDto'
-    ListCustomerDtoResponse:
+    ListCustomerResponse:
       required:
         - customers
       type: object
@@ -167,4 +160,4 @@ components:
         customers:
           type: array
           items:
-            $ref: '#/components/schemas/GetCustomerDto'
+            $ref: '#/components/schemas/GetCustomerResponse'
