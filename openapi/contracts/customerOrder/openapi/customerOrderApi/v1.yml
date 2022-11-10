@@ -30,6 +30,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MultipleCustomerOrderDtoResponse'
+        '401':
+           $ref: '#/components/responses/UnauthorizedError'
     post:
       tags:
         - CustomerOrder
@@ -46,12 +48,14 @@ paths:
         required: true
 
       responses:
-        201:
+        '201':
           description: Created
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/SingleCustomerOrderDtoResponse'
+        '401':
+           $ref: '#/components/responses/UnauthorizedError'
   /customer-orders/{id}:
     get:
       tags:
@@ -73,8 +77,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SingleCustomerOrderDtoResponse'
+        '401':
+           $ref: '#/components/responses/UnauthorizedError'
+
+security:
+  - basicAuth: []
 
 components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+
   schemas:
     CustomerOrderDto:
       required:
@@ -143,3 +157,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CustomerOrderDto'
+
+  responses:
+    UnauthorizedError:
+      description: Authentication information is missing or invalid
+      headers:
+        Authorization:
+          schema:
+            type: string
+          description: Basic authentication
