@@ -29,7 +29,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MultipleCustomerOrderDtoResponse'
+                $ref: '#/components/schemas/MultipleCustomerOrderResponse'
         '401':
            $ref: '#/components/responses/UnauthorizedError'
     post:
@@ -53,7 +53,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SingleCustomerOrderDtoResponse'
+                $ref: '#/components/schemas/SingleCustomerOrderResponse'
         '401':
            $ref: '#/components/responses/UnauthorizedError'
   /customer-orders/{id}:
@@ -76,7 +76,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SingleCustomerOrderDtoResponse'
+                $ref: '#/components/schemas/SingleCustomerOrderResponse'
         '401':
            $ref: '#/components/responses/UnauthorizedError'
 
@@ -90,7 +90,7 @@ components:
       scheme: basic
 
   schemas:
-    CustomerOrderDto:
+    CustomerOrder:
       required:
         - orderNumber
         - customerId
@@ -132,7 +132,7 @@ components:
           type: number
           example: 123.1
 
-    SingleCustomerOrderDtoResponse:
+    SingleCustomerOrderResponse:
       required:
         - message
         - customerOrder
@@ -143,8 +143,8 @@ components:
             example: request processed successfully
         customerOrder:
             type: object
-            $ref: '#/components/schemas/CustomerOrderDto'
-    MultipleCustomerOrderDtoResponse:
+            $ref: '#/components/schemas/CustomerOrder'
+    MultipleCustomerOrderResponse:
       required:
         - message
         - customerOrders
@@ -156,7 +156,7 @@ components:
         customerOrders:
           type: array
           items:
-            $ref: '#/components/schemas/CustomerOrderDto'
+            $ref: '#/components/schemas/CustomerOrder'
 
   responses:
     UnauthorizedError:
