@@ -29,7 +29,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MultipleCustomerOrderResponse'
+                $ref: '#/components/schemas/ListCustomerOrderResponse'
         '401':
            $ref: '#/components/responses/UnauthorizedError'
     post:
@@ -44,7 +44,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateOrderRequest'
+              $ref: '#/components/schemas/CreateCustomerOrderRequest'
         required: true
 
       responses:
@@ -53,7 +53,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SingleCustomerOrderResponse'
+                $ref: '#/components/schemas/CreateCustomerOrderResponse'
         '401':
            $ref: '#/components/responses/UnauthorizedError'
   /customer-orders/{id}:
@@ -76,7 +76,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SingleCustomerOrderResponse'
+                $ref: '#/components/schemas/GetCustomerOrderResponse'
         '401':
            $ref: '#/components/responses/UnauthorizedError'
 
@@ -113,7 +113,7 @@ components:
           type: number
           example: 123.1
 
-    CreateOrderRequest:
+    CreateCustomerOrderRequest:
       required:
         - orderNumber
         - customerId
@@ -132,27 +132,27 @@ components:
           type: number
           example: 123.1
 
-    SingleCustomerOrderResponse:
+    GetCustomerOrderResponse:
       required:
-        - message
         - customerOrder
       type: object
       properties:
-        message:
-            type: string
-            example: request processed successfully
         customerOrder:
             type: object
             $ref: '#/components/schemas/CustomerOrder'
-    MultipleCustomerOrderResponse:
+    CreateCustomerOrderResponse:
+          required:
+            - customerOrder
+          type: object
+          properties:
+            customerOrder:
+                type: object
+                $ref: '#/components/schemas/CustomerOrder'
+    ListCustomerOrderResponse:
       required:
-        - message
         - customerOrders
       type: object
       properties:
-        message:
-            type: string
-            example: request processed successfully
         customerOrders:
           type: array
           items:
