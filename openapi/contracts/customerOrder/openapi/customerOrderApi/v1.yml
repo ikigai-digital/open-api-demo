@@ -79,6 +79,8 @@ paths:
                 $ref: '#/components/schemas/GetCustomerOrderResponse'
         '401':
            $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Order is not found
 
 security:
   - basicAuth: []
