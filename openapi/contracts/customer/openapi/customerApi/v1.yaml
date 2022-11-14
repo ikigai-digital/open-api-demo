@@ -61,6 +61,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetCustomerResponse'
+        '404':
+          description: Customer not found
     put:
       tags:
         - updateCustomers
@@ -85,6 +87,8 @@ paths:
       responses:
         '200':
           description: OK
+        '404':
+          description: Customer not found
     delete:
       tags:
         - deleteCustomers
@@ -102,6 +106,8 @@ paths:
       responses:
         '204':
           description: Resource Deleted Successfully
+        '404':
+          description: Customer not found.
 components:
   schemas:
     CreateCustomerRequest:
