@@ -5,7 +5,7 @@ servers:
     url: https://virtserver.swaggerhub.com/v1/api
 info:
   description: This is a simple API
-  version: '1.0.5'
+  version: '1.0.6'
   title: '@ikigai-digital/inventory-api-server'
   contact:
     email: you@your-company.com
