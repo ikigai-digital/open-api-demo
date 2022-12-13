@@ -97,6 +97,7 @@ components:
         - orderNumber
         - customerId
         - price
+        - priceOriginal
       type: object
 
       properties:
@@ -112,6 +113,9 @@ components:
           format: int64
           example: 203
         price:
+          type: number
+          example: 123.1
+        priceOriginal:
           type: number
           example: 123.1
 
