@@ -97,7 +97,7 @@ components:
         - orderNumber
         - customerId
         - price
-        - originalPrice
+        - orderTotal
       type: object
 
       properties:
@@ -115,7 +115,7 @@ components:
         price:
           type: number
           example: 123.1
-        originalPrice:
+        orderTotal:
           type: number
           example: 123.1
 
