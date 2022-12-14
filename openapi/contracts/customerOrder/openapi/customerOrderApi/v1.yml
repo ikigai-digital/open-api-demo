@@ -96,8 +96,8 @@ components:
       required:
         - orderNumber
         - customerId
-        - price
-        - orderTotal
+        - grandTotal
+        - subTotal
       type: object
 
       properties:
@@ -112,10 +112,10 @@ components:
           type: integer
           format: int64
           example: 203
-        price:
+        grandTotal:
           type: number
           example: 123.1
-        orderTotal:
+        subTotal:
           type: number
           example: 123.1
 
@@ -123,7 +123,7 @@ components:
       required:
         - orderNumber
         - customerId
-        - price
+        - grandTotal
       type: object
 
       properties:
@@ -134,7 +134,7 @@ components:
           type: integer
           format: int64
           example: 203
-        price:
+        grandTotal:
           type: number
           example: 123.1
 
